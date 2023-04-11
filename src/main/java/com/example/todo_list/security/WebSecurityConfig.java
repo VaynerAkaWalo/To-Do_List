@@ -51,13 +51,8 @@ public class WebSecurityConfig {
 
         http.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll();
         http.csrf().disable();
+        http.headers().frameOptions().disable();
         return http.build();
-    }
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void addDefaultUser() {
-        UserEntity userEntity = new UserEntity("maciek15pl", passwordEncoder().encode("password"));
-        userEntityRepository.save(userEntity);
     }
 
 }
