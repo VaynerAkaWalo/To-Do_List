@@ -27,7 +27,10 @@ public class DefaultUserAndTasks {
         UserEntity userEntity = new UserEntity("user", passwordEncoder.encode("pass"));
         userEntityRepository.save(userEntity);
 
-        Task task = new Task("Wynieść śmieci", false, userEntity);
-        taskRepository.save(task);
+        Task task1 = new Task("Take out the garbage", "Don't forget", userEntity);
+        taskRepository.save(task1);
+
+        Task task2 = new Task("Wash dishes", "Just use dishwasher :D", userEntity);
+        taskRepository.save(task2);
     }
 }
