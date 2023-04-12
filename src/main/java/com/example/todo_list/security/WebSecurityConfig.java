@@ -2,6 +2,7 @@ package com.example.todo_list.security;
 
 import com.example.todo_list.data.UserEntityRepository;
 import com.example.todo_list.models.UserEntity;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,10 +47,11 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/register").permitAll();
+                    auth.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll();
                     auth.anyRequest().authenticated();
                 });
 
-        http.formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll();
+        http.formLogin().loginPage("/login").defaultSuccessUrl("/", true).permitAll();
         http.csrf().disable();
         http.headers().frameOptions().disable();
         return http.build();
