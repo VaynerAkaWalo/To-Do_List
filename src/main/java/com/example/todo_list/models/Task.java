@@ -2,6 +2,8 @@ package com.example.todo_list.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 public class Task {
 
@@ -10,16 +12,39 @@ public class Task {
     private Long id;
 
     private String name;
-    private Boolean completed;
+
+    private String details;
+    private TaskStatus status;
+
+    private LocalDate createdAt;
 
     @ManyToOne
     @JoinColumn(name = "userEntity_id")
     private UserEntity userEntity;
 
-    public Task(String name, Boolean completed, UserEntity userEntity) {
+    public Task(String name, String details, UserEntity userEntity) {
         this.name = name;
-        this.completed = completed;
+        this.details = details;
+        this.status = TaskStatus.UNCOMPLETED;
         this.userEntity = userEntity;
+        this.createdAt = LocalDate.now();
+    }
+
+    public Task() {
+        this.createdAt = LocalDate.now();
+        this.status = TaskStatus.UNCOMPLETED;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public LocalDate getDate() {
+        return createdAt;
     }
 
     public UserEntity getUserEntity() {
@@ -28,9 +53,6 @@ public class Task {
 
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
-    }
-
-    public Task() {
     }
 
     public Long getId() {
@@ -49,11 +71,11 @@ public class Task {
         this.name = name;
     }
 
-    public Boolean getCompleted() {
-        return completed;
+    public TaskStatus getStatus() {
+        return status;
     }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
-    }
+    public void setAsCompleted() { status = TaskStatus.COMPLETED; }
+
+    public void setAsUncompleted() { status = TaskStatus.UNCOMPLETED; }
 }
