@@ -1,0 +1,25 @@
+.content {
+    min-height: 94vh;
+}
+
+.login {
+    width: 400px;
+}
+
+.tasks {
+    width: 700px;
+    height: 70vh;
+}
+
+.taskList {
+    list-style: none;
+}
+
+.taskList > div {
+    padding: 0;
+}
+
+.taskList > div > div {
+    padding: 0;
+    margin: 10px;
+}
