@@ -1,7 +1,7 @@
 package com.example.todo_list;
 
-import com.example.todo_list.data.TaskRepository;
-import com.example.todo_list.data.UserEntityRepository;
+import com.example.todo_list.respositories.TaskRepository;
+import com.example.todo_list.respositories.UserEntityRepository;
 import com.example.todo_list.models.Task;
 import com.example.todo_list.models.UserEntity;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

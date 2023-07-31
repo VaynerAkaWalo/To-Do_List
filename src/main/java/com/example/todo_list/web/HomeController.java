@@ -1,6 +1,6 @@
 package com.example.todo_list.web;
 
-import com.example.todo_list.data.TasksService;
+import com.example.todo_list.services.TasksService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

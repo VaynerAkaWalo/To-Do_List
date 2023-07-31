@@ -1,4 +1,4 @@
-package com.example.todo_list.data;
+package com.example.todo_list.respositories;
 
 import com.example.todo_list.models.UserEntity;
 import org.springframework.data.repository.CrudRepository;

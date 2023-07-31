@@ -1,7 +1,7 @@
 package com.example.todo_list.web;
 
-import com.example.todo_list.data.TaskRepository;
-import com.example.todo_list.data.UserEntityRepository;
+import com.example.todo_list.respositories.TaskRepository;
+import com.example.todo_list.respositories.UserEntityRepository;
 import com.example.todo_list.exceptions.InternalErrorException;
 import com.example.todo_list.exceptions.TaskNotFoundException;
 import com.example.todo_list.exceptions.UnauthorizedException;

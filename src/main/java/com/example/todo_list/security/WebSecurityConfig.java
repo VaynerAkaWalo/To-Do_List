@@ -1,12 +1,10 @@
 package com.example.todo_list.security;
 
-import com.example.todo_list.data.UserEntityRepository;
+import com.example.todo_list.respositories.UserEntityRepository;
 import com.example.todo_list.models.UserEntity;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.EventListener;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;

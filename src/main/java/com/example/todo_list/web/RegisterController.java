@@ -1,14 +1,11 @@
 package com.example.todo_list.web;
 
 
-import com.example.todo_list.data.UserEntityRepository;
+import com.example.todo_list.respositories.UserEntityRepository;
 import com.example.todo_list.models.RegisterDTO;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Controller
 @RequestMapping("/register")
