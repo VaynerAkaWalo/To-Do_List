@@ -20,14 +20,14 @@ public class UserEntity implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "userEntity")
-    private List<Task> tasksList = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     public void addTask(Task task) {
-        tasksList.add(task);
+        tasks.add(task);
     }
 
-    public List<Task> getTasksList() {
-        return tasksList;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     public UserEntity() {
