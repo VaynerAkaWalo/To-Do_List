@@ -4,6 +4,7 @@ import com.example.todo_list.exceptions.TaskNotFoundException;
 import com.example.todo_list.exceptions.UnauthorizedException;
 import com.example.todo_list.exceptions.UserNotFoundException;
 import com.example.todo_list.models.TaskDTO;
+import com.example.todo_list.models.TaskStatus;
 import com.example.todo_list.respositories.TaskRepository;
 import com.example.todo_list.respositories.UserEntityRepository;
 import com.example.todo_list.models.Task;
@@ -54,10 +55,33 @@ public class TasksServiceImp implements TasksService {
             throw new UnauthorizedException();
         }
 
-        Optional<UserEntity> userEntityOptional= userEntityRepository.findByUsername(username);
-        UserEntity user = userEntityOptional.orElseThrow(UserNotFoundException::new);
+        task = taskDTO.TaskDTOtoTask(task.getUserEntity());
+        task.setId(id);
+        taskRepository.save(task);
+    }
 
-        taskRepository.save(taskDTO.TaskDTOtoTask(user));
+    @Override
+    public Optional<Task> getTaskById(Long id) {
+        return taskRepository.findById(id);
+    }
+
+    @Override
+    public void changeTaskStatus(Long id, String username) {
+        Optional<Task> taskOptional = taskRepository.findById(id);
+        Task task = taskOptional.orElseThrow(TaskNotFoundException::new);
+
+        if (!task.getUserEntity().getUsername().equals(username)) {
+            throw new UnauthorizedException();
+        }
+
+        if (task.getStatus() == TaskStatus.COMPLETED) {
+            task.setAsUncompleted();
+        }
+        else {
+            task.setAsCompleted();
+        }
+
+        taskRepository.save(task);
     }
 
     @Override

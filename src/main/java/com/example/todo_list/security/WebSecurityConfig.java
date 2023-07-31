@@ -1,5 +1,6 @@
 package com.example.todo_list.security;
 
+import com.example.todo_list.exceptions.UserNotFoundException;
 import com.example.todo_list.respositories.UserEntityRepository;
 import com.example.todo_list.models.UserEntity;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -12,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.Optional;
 
 @Configuration
 @EnableWebSecurity
@@ -31,13 +34,9 @@ public class WebSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(UserEntityRepository userEntityRepository) {
         return username -> {
-            UserEntity user = userEntityRepository.findByUsername(username);
-            if(user != null) {
-                return user;
-            }
-            else {
-                throw new UsernameNotFoundException("User: " + username + "not found");
-            }
+            Optional<UserEntity> user = userEntityRepository.findByUsername(username);
+
+            return user.orElseThrow(UserNotFoundException::new);
         };
     }
 

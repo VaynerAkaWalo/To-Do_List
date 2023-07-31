@@ -21,7 +21,7 @@ public class HomeController {
 
     @ModelAttribute
     public void getTasks(Model model, Principal principal) {
-        model.addAttribute("tasks", tasksService.getUserTasks(principal.getName()));
+        model.addAttribute("tasks", tasksService.getAllTasksByUser(principal.getName()));
     }
 
     @GetMapping
