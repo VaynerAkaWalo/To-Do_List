@@ -12,6 +12,7 @@
 <div class="content container-fluid bg-secondary text-dark d-flex justify-content-center align-items-center">
     <div class="card login p-4">
         <h2 class="text-center">Sign up</h2>
+        <p class="text-center text-danger" th:text="${message}"></p>
         <form method="POST" th::action="@{/register}" id="registerDTO">
             <div class="col-auto">
                 <label for="username" class="form-label">Username: </label>

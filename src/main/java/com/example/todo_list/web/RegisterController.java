@@ -1,22 +1,20 @@
 package com.example.todo_list.web;
 
 
-import com.example.todo_list.respositories.UserEntityRepository;
 import com.example.todo_list.models.RegisterDTO;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.example.todo_list.services.RegisterService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/register")
 public class  RegisterController {
 
-    private final UserEntityRepository userEntityRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final RegisterService registerService;
 
-    public RegisterController(UserEntityRepository userEntityRepository, PasswordEncoder passwordEncoder) {
-        this.userEntityRepository = userEntityRepository;
-        this.passwordEncoder = passwordEncoder;
+    public RegisterController(RegisterService registerService) {
+        this.registerService = registerService;
     }
 
     @GetMapping
@@ -25,12 +23,20 @@ public class  RegisterController {
     }
 
     @PostMapping
-    public String registerPost(RegisterDTO registerDTO) {
-        if (userEntityRepository.existsUserEntityByUsername(registerDTO.username())){
+    public String registerPost(RegisterDTO registerDTO, Model model) {
+        try {
+            registerService.registerUser(registerDTO);
+        }
+        catch (RuntimeException exception) {
+            model.addAttribute("message", "Username already taken");
             return "register";
         }
 
-        userEntityRepository.save(registerDTO.dtoToUserEntity(passwordEncoder));
         return "redirect:/login";
+    }
+
+    @ModelAttribute
+    public String message() {
+        return "";
     }
 }
