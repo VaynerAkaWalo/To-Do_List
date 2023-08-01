@@ -19,30 +19,30 @@ public class TaskRestController {
         this.tasksService = tasksService;
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Task> task(@RequestParam Long id, Principal principal) {
         return ResponseEntity.ok(tasksService.getTaskById(id, principal.getName()));
     }
 
-    @PostMapping()
-    public ResponseEntity<?> createTask(TaskDTO taskDTO, Principal principal) {
+    @PostMapping
+    public ResponseEntity<?> createTask(@RequestBody TaskDTO taskDTO, Principal principal) {
         Task result = tasksService.addTask(taskDTO, principal.getName());
         return ResponseEntity.created(URI.create("/task/" + result.getId())).build();
     }
 
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<TaskDTO> updateTask(@RequestParam Long id, @RequestBody TaskDTO taskDTO, Principal principal) {
         Task result = tasksService.editTask(id, taskDTO, principal.getName());
         return ResponseEntity.ok(TaskDTO.TaskToDTO(result));
     }
 
-    @PatchMapping()
+    @PatchMapping
     public ResponseEntity<TaskDTO> toggleStatus(@RequestParam Long id, Principal principal) {
         Task result = tasksService.changeTaskStatus(id, principal.getName());
         return ResponseEntity.ok(TaskDTO.TaskToDTO(result));
     }
 
-    @DeleteMapping()
+    @DeleteMapping
     public ResponseEntity<?> deleteTask(@RequestParam Long id, Principal principal) {
         tasksService.deleteTask(id, principal.getName());
         return ResponseEntity.ok().build();
