@@ -17,6 +17,7 @@
         <p class="text-center my-2" th:text="'Created at: ' + ${task.getDate()}"></p>
         <p class="text-center mb-2" th:text="'Status: ' + ${task.getStatus()}"></p>
         <input type="hidden" name="id" id="id" th:value="${task.getId()}">
+        <input type="hidden" name="status" id="status" th:value="${task.getStatus()}">
         <textarea name="details" id="details" cols="15" rows="15" style="resize:none"
                   th:text="${task.details}"></textarea>
         <div class="container-fluid d-flex justify-content-center">

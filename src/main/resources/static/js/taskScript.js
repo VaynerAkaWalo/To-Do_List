@@ -1,36 +1,43 @@
 let taskName = document.getElementById("name");
 let taskDetails = document.getElementById("details");
 let taskId = document.getElementById("id").value;
+let taskStatus = document.getElementById("status")
+const status = (taskStatus.value !== "Uncompleted").toString()
 
-document.getElementById("update").addEventListener("click", () => {
+document.getElementById("update").addEventListener("click", async () => {
     let data = {
         name: taskName.value,
-        details: taskDetails.value
+        details: taskDetails.value,
+        status
     }
 
-    fetch("/task?id=" + taskId, {
+    const res = await fetch("api/task?id=" + taskId, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
-    }).then((res) => {
-        if (res.ok) {
-            alert("Task updated")
-        }
     })
+    if(res.ok) {
+        window.location.replace("/")
+    }
+    else {
+        alert("error")
+    }
 })
 
-document.getElementById("delete").addEventListener("click", () => {
-    fetch("/task?id=" + taskId, {
+document.getElementById("delete").addEventListener("click", async () => {
+    const res = await fetch("api/task?id=" + taskId, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
         },
-    }).then((res) => {
-        if (res.ok) {
-            window.location.replace("/")
-        }
     })
+    if(res.ok) {
+        window.location.replace("/")
+    }
+    else {
+        alert("error")
+    }
 })
 

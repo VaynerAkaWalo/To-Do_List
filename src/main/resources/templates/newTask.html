@@ -11,13 +11,13 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="content container-fluid bg-secondary text-dark d-flex justify-content-center align-items-center">
     <div class="card tasks p-3">
-        <form th::action="@{/task/create}" method="post" id="taskDTO">
+        <form th:action="@{/task/create}" method="post" id="taskDTO">
             <div class="card-header" style="text-align: center">
                 <input class="h2 text-center" type="text" name="name" id="name" th:value="${task.getName()}">
             </div>
             <p class="text-center my-2" th:text="'Created at: ' + ${task.getDate()}"></p>
             <p class="text-center mb-2" th:text="'Status: ' + ${task.getStatus()}"></p>
-            <input type="hidden" name="id" id="id" th:value="${task.getId()}">
+            <input type="hidden" name="status" id="status" th:value="${false}">
             <textarea class="container-fluid" name="details" id="details" cols="25" rows="15" style="resize:none"
                       th:text="${task.details}"></textarea>
             <div class="container-fluid d-flex justify-content-center"></div>
@@ -30,7 +30,6 @@
 
 </div>
 </div>
-<script src="/js/taskScript.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

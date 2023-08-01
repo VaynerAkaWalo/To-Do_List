@@ -2,16 +2,19 @@ package com.example.todo_list.models;
 
 public record TaskDTO(String name, String details, boolean status) {
 
-    public Task TaskDTOtoTask(UserEntity userEntity) {
-        Task task = new Task();
+    public void transferDataToTask(Task task) {
+        task.setName(name);
+        task.setDetails(details);
 
-        task.setName(this.name);
-        task.setDetails(this.details);
         if (status) {
             task.setAsCompleted();
         }
-        task.setUserEntity(userEntity);
+        else {
+            task.setAsUncompleted();
+        }
+    }
 
-        return task;
+    public static TaskDTO TaskToDTO(Task task) {
+        return new TaskDTO(task.getName(), task.getDetails(), task.getStatus() == TaskStatus.COMPLETED);
     }
 }

@@ -27,11 +27,18 @@ public class TasksServiceImp implements TasksService {
     }
 
     @Override
-    public void addTask(TaskDTO taskDTO, String username) {
+    public Task addTask(TaskDTO taskDTO, String username) {
         Optional<UserEntity> userEntityOptional= userEntityRepository.findByUsername(username);
         UserEntity user = userEntityOptional.orElseThrow(UserNotFoundException::new);
 
-        taskRepository.save(taskDTO.TaskDTOtoTask(user));
+        Task task = new Task();
+        task.setUserEntity(user);
+
+        taskDTO.transferDataToTask(task);
+
+        taskRepository.save(task);
+
+        return task;
     }
 
     @Override
@@ -47,7 +54,7 @@ public class TasksServiceImp implements TasksService {
     }
 
     @Override
-    public void editTask(Long id, TaskDTO taskDTO, String username) {
+    public Task editTask(Long id, TaskDTO taskDTO, String username) {
         Optional<Task> taskOptional = taskRepository.findById(id);
         Task task = taskOptional.orElseThrow(TaskNotFoundException::new);
 
@@ -55,18 +62,27 @@ public class TasksServiceImp implements TasksService {
             throw new UnauthorizedException();
         }
 
-        task = taskDTO.TaskDTOtoTask(task.getUserEntity());
-        task.setId(id);
+        taskDTO.transferDataToTask(task);
+
         taskRepository.save(task);
+
+        return task;
     }
 
     @Override
-    public Optional<Task> getTaskById(Long id) {
-        return taskRepository.findById(id);
+    public Task getTaskById(Long id, String username) {
+        Optional<Task> taskOptional = taskRepository.findById(id);
+        Task task = taskOptional.orElseThrow(TaskNotFoundException::new);
+
+        if (!task.getUserEntity().getUsername().equals(username)) {
+            throw new UnauthorizedException();
+        }
+
+        return taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
     }
 
     @Override
-    public void changeTaskStatus(Long id, String username) {
+    public Task changeTaskStatus(Long id, String username) {
         Optional<Task> taskOptional = taskRepository.findById(id);
         Task task = taskOptional.orElseThrow(TaskNotFoundException::new);
 
@@ -82,6 +98,8 @@ public class TasksServiceImp implements TasksService {
         }
 
         taskRepository.save(task);
+
+        return task;
     }
 
     @Override

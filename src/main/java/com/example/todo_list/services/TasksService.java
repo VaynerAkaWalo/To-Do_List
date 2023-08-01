@@ -9,15 +9,15 @@ import java.util.Optional;
 
 public interface TasksService {
 
-    void addTask(TaskDTO taskDTO, String username);
+    Task addTask(TaskDTO taskDTO, String username);
 
     void deleteTask(Long id, String username);
 
-    void editTask(Long id, TaskDTO taskDTO, String username);
+    Task editTask(Long id, TaskDTO taskDTO, String username);
 
-    void changeTaskStatus(Long id, String username);
+    Task changeTaskStatus(Long id, String username);
 
-    Optional<Task> getTaskById(Long id);
+    Task getTaskById(Long id, String username);
 
     List<Task> getAllTasksByUser(String username);
 }

@@ -4,7 +4,7 @@ let showCompleted = document.getElementById("showCompleted")
 
 for (const changeStatusButton of changeStatusButtons) {
     changeStatusButton.addEventListener("click", () => {
-        fetch("/task?id=" + changeStatusButton.getAttribute('taskid'), {
+        fetch("/api/task?id=" + changeStatusButton.getAttribute('taskid'), {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
