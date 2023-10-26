@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=todolist
+      - POSTGRES_DB=todo_db
+    ports:
+      - "5432:5432"
+    networks:
+      network:
+
+  todolist:
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      network:
+
+networks:
+  network:
