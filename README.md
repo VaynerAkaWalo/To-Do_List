@@ -16,7 +16,7 @@ To run this application and the database, you can use Docker and Docker Compose.
 
 1. Clone this repository to your local machine.
 
-2. Make sure you have Docker and Docker Compose installed.
+2. Make sure you have Docker and maven installed.
 
 3. Navigate to the project directory in your terminal.
 
