@@ -1,5 +1,6 @@
 package com.example.todo_list.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class Task {
 
     private LocalDate createdAt;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "userEntity_id")
     private UserEntity userEntity;

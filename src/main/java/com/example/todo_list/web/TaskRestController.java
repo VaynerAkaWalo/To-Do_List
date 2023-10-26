@@ -10,7 +10,7 @@ import java.net.URI;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/api/task")
+@RequestMapping("/api/tasks")
 public class TaskRestController {
 
     private final TasksService tasksService;
@@ -20,7 +20,10 @@ public class TaskRestController {
     }
 
     @GetMapping
-    public ResponseEntity<Task> task(@RequestParam Long id, Principal principal) {
+    public ResponseEntity<?> task(@RequestParam(required = false) Long id, Principal principal) {
+        if (id == null) {
+            return ResponseEntity.ok(tasksService.getAllTasksByUser(principal.getName()));
+        }
         return ResponseEntity.ok(tasksService.getTaskById(id, principal.getName()));
     }
 
