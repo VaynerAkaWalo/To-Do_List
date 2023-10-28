@@ -20,11 +20,11 @@ public class TaskRestController {
     }
 
     @GetMapping
-    public ResponseEntity<?> task(@RequestParam(required = false) Long id, Principal principal) {
-        if (id == null) {
+    public ResponseEntity<?> task(@RequestParam(value = "taskId", required = false) Long taskId, Principal principal) {
+        if (taskId == null) {
             return ResponseEntity.ok(tasksService.getAllTasksByUser(principal.getName()));
         }
-        return ResponseEntity.ok(tasksService.getTaskById(id, principal.getName()));
+        return ResponseEntity.ok(tasksService.getTaskById(taskId, principal.getName()));
     }
 
     @PostMapping
