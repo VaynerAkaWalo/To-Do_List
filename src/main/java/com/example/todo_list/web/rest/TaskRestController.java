@@ -1,4 +1,4 @@
-package com.example.todo_list.web;
+package com.example.todo_list.web.rest;
 
 import com.example.todo_list.models.Task;
 import com.example.todo_list.models.TaskDTO;
@@ -30,24 +30,24 @@ public class TaskRestController {
     @PostMapping
     public ResponseEntity<?> createTask(@RequestBody TaskDTO taskDTO, Principal principal) {
         Task result = tasksService.addTask(taskDTO, principal.getName());
-        return ResponseEntity.created(URI.create("/task/" + result.getId())).build();
+        return ResponseEntity.created(URI.create("/api/tasks/" + result.getId())).build();
     }
 
     @PutMapping
-    public ResponseEntity<TaskDTO> updateTask(@RequestParam Long id, @RequestBody TaskDTO taskDTO, Principal principal) {
-        Task result = tasksService.editTask(id, taskDTO, principal.getName());
+    public ResponseEntity<TaskDTO> updateTask(@RequestParam Long taskId, @RequestBody TaskDTO taskDTO, Principal principal) {
+        Task result = tasksService.editTask(taskId, taskDTO, principal.getName());
         return ResponseEntity.ok(TaskDTO.TaskToDTO(result));
     }
 
     @PatchMapping
-    public ResponseEntity<TaskDTO> toggleStatus(@RequestParam Long id, Principal principal) {
-        Task result = tasksService.changeTaskStatus(id, principal.getName());
+    public ResponseEntity<TaskDTO> toggleStatus(@RequestParam Long taskId, Principal principal) {
+        Task result = tasksService.changeTaskStatus(taskId, principal.getName());
         return ResponseEntity.ok(TaskDTO.TaskToDTO(result));
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteTask(@RequestParam Long id, Principal principal) {
-        tasksService.deleteTask(id, principal.getName());
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> deleteTask(@RequestParam Long taskId, Principal principal) {
+        tasksService.deleteTask(taskId, principal.getName());
+        return ResponseEntity.noContent().build();
     }
 }

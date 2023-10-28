@@ -1,4 +1,4 @@
-package com.example.todo_list.web;
+package com.example.todo_list.web.ui;
 
 import com.example.todo_list.services.TasksService;
 import org.springframework.stereotype.Controller;

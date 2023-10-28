@@ -1,4 +1,4 @@
-package com.example.todo_list.web;
+package com.example.todo_list.web.ui;
 
 import com.example.todo_list.models.Task;
 import com.example.todo_list.models.TaskDTO;
