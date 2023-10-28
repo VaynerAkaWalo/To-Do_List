@@ -1,4 +1,4 @@
-package com.example.todo_list.web;
+package com.example.todo_list.web.rest;
 
 import com.example.todo_list.exceptions.ForbiddenException;
 import com.example.todo_list.exceptions.TaskNotFoundException;
