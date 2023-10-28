@@ -9,16 +9,5 @@ services:
       - POSTGRES_DB=todo_db
     ports:
       - "5432:5432"
-    networks:
-      network:
-
-  todolist:
-    build:
-      dockerfile: ./Dockerfile
-    ports:
-      - "8080:8080"
-    networks:
-      network:
-
-networks:
-  network:
+    volumes:
+      - /temp
