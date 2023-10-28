@@ -12,7 +12,7 @@ This is a simple Spring Boot project called **To-Do List** that allows you to ma
 
 ## Getting Started
 
-To run this application and the database, you can use Docker and Docker Compose. Follow these steps to get started:
+Follow these steps to get started:
 
 1. Clone this repository to your local machine.
 
@@ -23,11 +23,10 @@ To run this application and the database, you can use Docker and Docker Compose.
 4. Run the following command to start the application and the database:
 
    ```bash
-   mvn clean clean package -DskipTests
-   docker-compose up
+   mvn spring-boot:run
    ```
 
-5. Once the containers are up and running, you can access the application by opening a web browser and navigating to [http://localhost:8080](http://localhost:8080).
+5. The application and database in Docker will start automatically, you can access the application by opening a web browser and navigating to [http://localhost:8080](http://localhost:8080).
 
 ## Technologies Used
 
@@ -38,7 +37,6 @@ To run this application and the database, you can use Docker and Docker Compose.
 - **Spring Security**: Manages authentication and authorization in Spring applications.
 - **PostgreSQL**: The relational database for storing task data.
 - **Docker**: Used for containerization.
-- **Docker Compose**: Simplifies the setup and running of multiple containers.
 
 # Rest API
 ## Authentication
