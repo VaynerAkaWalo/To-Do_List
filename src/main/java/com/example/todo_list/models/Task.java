@@ -2,10 +2,12 @@ package com.example.todo_list.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
 @Entity
+@Getter
 public class Task {
 
     @Id
@@ -37,9 +39,6 @@ public class Task {
         this.status = TaskStatus.UNCOMPLETED;
     }
 
-    public String getDetails() {
-        return details;
-    }
 
     public void setDetails(String details) {
         this.details = details;
@@ -49,35 +48,30 @@ public class Task {
         return createdAt;
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public TaskStatus getStatus() {
-        return status;
     }
 
     public void setAsCompleted() { status = TaskStatus.COMPLETED; }
 
     public void setAsUncompleted() { status = TaskStatus.UNCOMPLETED; }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", details='" + details + '\'' +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

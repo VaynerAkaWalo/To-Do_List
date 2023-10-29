@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Long> {
-    public List<Task> getAllByUserEntity(UserEntity userEntity);
+    List<Task> getAllByUserEntity(UserEntity userEntity);
 }
