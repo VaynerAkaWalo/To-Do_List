@@ -1,7 +1,7 @@
 package com.example.todo_list.web.ui;
 
 import com.example.todo_list.models.Task;
-import com.example.todo_list.models.TaskDTO;
+import com.example.todo_list.models.dto.TaskDTO;
 import com.example.todo_list.services.TasksService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

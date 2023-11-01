@@ -1,4 +1,7 @@
-package com.example.todo_list.models;
+package com.example.todo_list.models.dto;
+
+import com.example.todo_list.models.Task;
+import com.example.todo_list.models.TaskStatus;
 
 public record TaskDTO(String name, String details, boolean status) {
 
@@ -14,7 +17,7 @@ public record TaskDTO(String name, String details, boolean status) {
         }
     }
 
-    public static TaskDTO TaskToDTO(Task task) {
+    public static TaskDTO from(Task task) {
         return new TaskDTO(task.getName(), task.getDetails(), task.getStatus() == TaskStatus.COMPLETED);
     }
 }

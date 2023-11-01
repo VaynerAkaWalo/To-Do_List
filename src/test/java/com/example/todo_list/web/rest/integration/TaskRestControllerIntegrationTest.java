@@ -1,7 +1,7 @@
 package com.example.todo_list.web.rest.integration;
 
 import com.example.todo_list.models.Task;
-import com.example.todo_list.models.TaskDTO;
+import com.example.todo_list.models.dto.TaskDTO;
 import com.example.todo_list.services.TasksService;
 import com.example.todo_list.web.rest.TaskRestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -74,7 +74,7 @@ class TaskRestControllerIntegrationTest {
         when(tasksService.getTaskById(id ,"springTest")).thenReturn(task);
 
         mvc.perform(MockMvcRequestBuilders
-                        .get("/api/tasks?taskId=1")
+                        .get("/api/tasks/1")
                         .accept(MediaType.APPLICATION_JSON))
                         .andDo(print())
                         .andExpect(status().isOk())
@@ -108,7 +108,7 @@ class TaskRestControllerIntegrationTest {
         when(tasksService.editTask(task.getId(), taskDTO, "SpringTest")).thenReturn(otherTask);
 
         mvc.perform(MockMvcRequestBuilders
-                        .put("/api/tasks?taskId=" + task.getId())
+                        .put("/api/tasks/" + task.getId())
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -127,7 +127,7 @@ class TaskRestControllerIntegrationTest {
         task.setAsCompleted();
 
         mvc.perform(MockMvcRequestBuilders
-                        .patch("/api/tasks?taskId=" + task.getId())
+                        .patch("/api/tasks/" + task.getId())
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON))
                         .andDo(print())
@@ -141,7 +141,7 @@ class TaskRestControllerIntegrationTest {
     @Test
     void deleteTaskShouldReturnNoContentStatus() throws Exception {
         mvc.perform(MockMvcRequestBuilders
-                        .delete("/api/tasks?taskId=" + task.getId())
+                        .delete("/api/tasks/" + task.getId())
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON))
                         .andDo(print())
