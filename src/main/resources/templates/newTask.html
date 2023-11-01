@@ -11,7 +11,7 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="content container-fluid bg-secondary text-dark d-flex justify-content-center align-items-center">
     <div class="card tasks p-3">
-        <form th:action="@{/task/create}" method="post" id="taskDTO">
+        <form th:action="@{/task/create}" method="post" id="taskCreationDTO">
             <div class="card-header" style="text-align: center">
                 <input class="h2 text-center" type="text" name="name" id="name" th:value="${task.getName()}">
             </div>

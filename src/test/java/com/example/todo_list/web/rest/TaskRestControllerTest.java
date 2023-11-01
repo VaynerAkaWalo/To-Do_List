@@ -1,7 +1,7 @@
 package com.example.todo_list.web.rest;
 
 import com.example.todo_list.models.Task;
-import com.example.todo_list.models.dto.TaskDTO;
+import com.example.todo_list.models.dto.request.TaskCreationDTO;
 import com.example.todo_list.services.TasksService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -85,15 +85,15 @@ class TaskRestControllerTest {
     @WithMockUser("SpringTest")
     @Test
     void createTaskShouldReturnCreatedStatus() throws Exception {
-        TaskDTO taskDTO = new TaskDTO(task.getName(), task.getDetails(), false);
-        when(tasksService.addTask(taskDTO, "SpringTest")).thenReturn(task);
+        TaskCreationDTO taskCreationDTO = new TaskCreationDTO(task.getName(), task.getDetails(), false);
+        when(tasksService.addTask(taskCreationDTO, "SpringTest")).thenReturn(task);
 
         mvc.perform(MockMvcRequestBuilders
                 .post("/api/tasks")
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(taskDTO)))
+                        .content(objectMapper.writeValueAsString(taskCreationDTO)))
                         .andDo(print())
                         .andExpect(status().isCreated())
                         .andExpect(redirectedUrl("/api/tasks/" + task.getId()));
@@ -102,16 +102,16 @@ class TaskRestControllerTest {
     @WithMockUser("SpringTest")
     @Test
     void updateTaskShouldReturnOkStatusAndReturnUpdatedTask() throws Exception {
-        TaskDTO taskDTO = new TaskDTO(otherTask.getName(), otherTask.getDetails(), false);
+        TaskCreationDTO taskCreationDTO = new TaskCreationDTO(otherTask.getName(), otherTask.getDetails(), false);
         otherTask.setId(task.getId());
-        when(tasksService.editTask(task.getId(), taskDTO, "SpringTest")).thenReturn(otherTask);
+        when(tasksService.editTask(task.getId(), taskCreationDTO, "SpringTest")).thenReturn(otherTask);
 
         mvc.perform(MockMvcRequestBuilders
                         .put("/api/tasks?taskId=" + task.getId())
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(taskDTO)))
+                        .content(objectMapper.writeValueAsString(taskCreationDTO)))
                         .andDo(print())
                         .andExpect(status().isOk())
                         .andExpect(jsonPath("$.name").value(otherTask.getName()))

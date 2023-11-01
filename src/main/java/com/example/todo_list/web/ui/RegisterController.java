@@ -1,7 +1,7 @@
 package com.example.todo_list.web.ui;
 
 
-import com.example.todo_list.models.dto.RegisterDTO;
+import com.example.todo_list.models.dto.request.RegisterCreationDTO;
 import com.example.todo_list.services.RegisterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class  RegisterController {
     }
 
     @PostMapping
-    public String registerPost(RegisterDTO registerDTO, Model model) {
+    public String registerPost(RegisterCreationDTO registerDTO, Model model) {
         try {
             registerService.registerUser(registerDTO);
         }

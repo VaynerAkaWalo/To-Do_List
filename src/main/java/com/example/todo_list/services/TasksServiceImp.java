@@ -4,7 +4,7 @@ import com.example.todo_list.exceptions.TaskNotFoundException;
 import com.example.todo_list.exceptions.UnauthorizedException;
 import com.example.todo_list.exceptions.UserNotFoundException;
 import com.example.todo_list.models.Task;
-import com.example.todo_list.models.dto.TaskDTO;
+import com.example.todo_list.models.dto.request.TaskCreationDTO;
 import com.example.todo_list.models.TaskStatus;
 import com.example.todo_list.models.UserEntity;
 import com.example.todo_list.respositories.TaskRepository;
@@ -26,7 +26,7 @@ public class TasksServiceImp implements TasksService {
 
 
     @Override
-    public Task addTask(TaskDTO taskDTO, String username) {
+    public Task addTask(TaskCreationDTO taskCreationDTO, String username) {
         log.info("about to retrieve user [{}]", username);
         Optional<UserEntity> userEntityOptional= userEntityRepository.findByUsername(username);
         UserEntity user = userEntityOptional.orElseThrow(UserNotFoundException::new);
@@ -34,7 +34,7 @@ public class TasksServiceImp implements TasksService {
         Task task = new Task();
         task.setUserEntity(user);
 
-        taskDTO.transferDataToTask(task);
+        taskCreationDTO.to(task);
 
         log.info("about to save task [{}] by user [{}]", task, user.getUsername());
         taskRepository.save(task);
@@ -61,7 +61,7 @@ public class TasksServiceImp implements TasksService {
     }
 
     @Override
-    public Task editTask(Long id, TaskDTO taskDTO, String username) {
+    public Task editTask(Long id, TaskCreationDTO taskCreationDTO, String username) {
         log.info("about to retrieve task [{}] by user [{}]", id, username);
         Optional<Task> taskOptional = taskRepository.findById(id);
         Task task = taskOptional.orElseThrow(TaskNotFoundException::new);
@@ -74,7 +74,7 @@ public class TasksServiceImp implements TasksService {
             throw new UnauthorizedException();
         }
 
-        taskDTO.transferDataToTask(task);
+        taskCreationDTO.to(task);
 
         log.info("about to update task [{}] by user [{}]", id, username);
         taskRepository.save(task);
