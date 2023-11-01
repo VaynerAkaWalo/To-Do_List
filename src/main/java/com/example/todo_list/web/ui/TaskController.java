@@ -1,7 +1,7 @@
 package com.example.todo_list.web.ui;
 
 import com.example.todo_list.models.Task;
-import com.example.todo_list.models.dto.TaskDTO;
+import com.example.todo_list.models.dto.request.TaskCreationDTO;
 import com.example.todo_list.services.TasksService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,8 +38,8 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public String createTask(TaskDTO taskDTO, Principal principal) {
-        tasksService.addTask(taskDTO, principal.getName());
+    public String createTask(TaskCreationDTO taskCreationDTO, Principal principal) {
+        tasksService.addTask(taskCreationDTO, principal.getName());
 
         return "redirect:/";
     }
