@@ -11,7 +11,7 @@ document.getElementById("update").addEventListener("click", async () => {
         status
     }
 
-    const res = await fetch("api/task?id=" + taskId, {
+    const res = await fetch("api/tasks/" + taskId, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -27,7 +27,7 @@ document.getElementById("update").addEventListener("click", async () => {
 })
 
 document.getElementById("delete").addEventListener("click", async () => {
-    const res = await fetch("api/task?id=" + taskId, {
+    const res = await fetch("api/tasks/" + taskId, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
