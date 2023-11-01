@@ -1,7 +1,7 @@
 package com.example.todo_list.web.rest;
 
 import com.example.todo_list.models.Task;
-import com.example.todo_list.models.TaskDTO;
+import com.example.todo_list.models.dto.TaskDTO;
 import com.example.todo_list.services.TasksService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

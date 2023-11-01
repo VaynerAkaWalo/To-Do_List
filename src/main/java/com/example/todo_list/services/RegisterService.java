@@ -1,7 +1,7 @@
 package com.example.todo_list.services;
 
 import com.example.todo_list.exceptions.UsernameAlreadyTakenException;
-import com.example.todo_list.models.RegisterDTO;
+import com.example.todo_list.models.dto.RegisterDTO;
 import com.example.todo_list.models.UserEntity;
 import com.example.todo_list.respositories.UserEntityRepository;
 import lombok.RequiredArgsConstructor;

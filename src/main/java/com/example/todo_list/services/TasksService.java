@@ -1,11 +1,9 @@
 package com.example.todo_list.services;
 
 import com.example.todo_list.models.Task;
-import com.example.todo_list.models.TaskDTO;
-import com.example.todo_list.models.UserEntity;
+import com.example.todo_list.models.dto.TaskDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TasksService {
 

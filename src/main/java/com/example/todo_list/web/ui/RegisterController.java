@@ -1,7 +1,7 @@
 package com.example.todo_list.web.ui;
 
 
-import com.example.todo_list.models.RegisterDTO;
+import com.example.todo_list.models.dto.RegisterDTO;
 import com.example.todo_list.services.RegisterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
