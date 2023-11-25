@@ -1,7 +1,7 @@
 package com.example.todo_list.services;
 
+import com.example.todo_list.exceptions.ForbiddenException;
 import com.example.todo_list.exceptions.TaskNotFoundException;
-import com.example.todo_list.exceptions.UnauthorizedException;
 import com.example.todo_list.exceptions.UserNotFoundException;
 import com.example.todo_list.models.Task;
 import com.example.todo_list.models.dto.request.TaskCreationDTO;
@@ -53,7 +53,7 @@ public class TasksServiceImp implements TasksService {
                     username,
                     id,
                     task.getUserEntity().getUsername());
-            throw new UnauthorizedException();
+            throw new ForbiddenException();
         }
 
         log.info("about to delete task [{}] by user [{}]", id, username);
@@ -71,7 +71,7 @@ public class TasksServiceImp implements TasksService {
                     username,
                     id,
                     task.getUserEntity().getUsername());
-            throw new UnauthorizedException();
+            throw new ForbiddenException();
         }
 
         taskCreationDTO.to(task);
@@ -93,7 +93,7 @@ public class TasksServiceImp implements TasksService {
                     username,
                     id,
                     task.getUserEntity().getUsername());
-            throw new UnauthorizedException();
+            throw new ForbiddenException();
         }
 
         return task;
@@ -110,7 +110,7 @@ public class TasksServiceImp implements TasksService {
                     username,
                     id,
                     task.getUserEntity().getUsername());
-            throw new UnauthorizedException();
+            throw new ForbiddenException();
         }
 
         if (task.getStatus() == TaskStatus.COMPLETED) {
